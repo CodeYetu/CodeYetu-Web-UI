@@ -7,6 +7,7 @@ import { basicSetup } from 'codemirror';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { javascript } from '@codemirror/lang-javascript';
 import { ZoomInOutlined, ZoomOutOutlined } from '@mui/icons-material';
+import { Resizable } from '../Resizable';
 
 export const Editor = () => {
 	const [code, setCode] = useState('');
@@ -47,25 +48,49 @@ export const Editor = () => {
 	}, [fontSize]);
 
 	return (
-		<div ref={editorRef} className='w-full h-full'>
-			<div className='absolute bottom-1 right-1 z-10 w-auto'>
-				<button
-					onClick={() => setFontSize((prev) => prev + 1)}
-					className='px-2 py-0.5 mr-0.5 rounded-l-lg bg-teal-300 text-center opacity-30 hover:bg-teal-500 hover:opacity-100'
+		<>
+			<Resizable direction='vertical'>
+				<div
+					ref={editorRef}
+					style={{
+						height: 'calc(100% - 10px)',
+					}}
 				>
-					<span className='text-white text-md font-semibold'>
-						<ZoomInOutlined />
-					</span>
-				</button>
-				<button
-					onClick={() => setFontSize((prev) => prev - 1)}
-					className='px-2 py-0.5 rounded-r-lg bg-teal-300 text-center opacity-30 hover:bg-teal-500 hover:opacity-100'
-				>
-					<span className='text-white text-md font-semibold'>
-						<ZoomOutOutlined />
-					</span>
-				</button>
+					<div className='absolute bottom-1 right-1 z-10 w-auto'>
+						<button
+							onClick={() => setFontSize((prev) => prev + 1)}
+							className='px-2 py-0.5 mr-0.5 rounded-l-lg bg-teal-300 text-center opacity-30 hover:bg-teal-500 hover:opacity-100'
+						>
+							<span className='text-white text-md font-semibold'>
+								<ZoomInOutlined />
+							</span>
+						</button>
+						<button
+							onClick={() => setFontSize((prev) => prev - 1)}
+							className='px-2 py-0.5 rounded-r-lg bg-teal-300 text-center opacity-30 hover:bg-teal-500 hover:opacity-100'
+						>
+							<span className='text-white text-md font-semibold'>
+								<ZoomOutOutlined />
+							</span>
+						</button>
+					</div>
+				</div>
+			</Resizable>
+			<div className='flex flex-grow'>
+				<Resizable direction='horizontal'>
+					<div
+						className='relative h-full overflow-hidden'
+						style={{ width: 'calc(100% - 5px)' }}
+					>
+						lhfjdh
+						<br />
+						sdkksnkn
+						<br />
+						qnsjks
+					</div>
+				</Resizable>
+				<div className='relative h-full flex-grow'>jkkjfad</div>
 			</div>
-		</div>
+		</>
 	);
 };
