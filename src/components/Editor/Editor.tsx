@@ -47,8 +47,8 @@ export const Editor = () => {
 	}, [fontSize]);
 
 	return (
-		<div ref={editorRef} className='w-full min-h-screen relative'>
-			<div className='absolute top-1 right-1 z-10 w-auto'>
+		<div ref={editorRef} className='w-full h-full'>
+			<div className='absolute bottom-1 right-1 z-10 w-auto'>
 				<button
 					onClick={() => setFontSize((prev) => prev + 1)}
 					className='px-2 py-0.5 mr-0.5 rounded-l-lg bg-teal-300 text-center opacity-30 hover:bg-teal-500 hover:opacity-100'
