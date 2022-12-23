@@ -6,10 +6,7 @@ import { AppContext, AppContextType } from '../context';
 export const App = () => {
 	const { language } = useContext(AppContext) as AppContextType;
 
-	useEffect(() => {
-		console.log(language);
-		return;
-	}, [language]);
+	console.log(language);
 
 	return (
 		<div className='flex flex-col h-full'>

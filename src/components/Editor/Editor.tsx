@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './Editor.scss';
 import { Resizable } from '../Resizable';
-import { CodeEditor } from './CodeEditor';
+import { CodeEditor } from '../CodeEditor';
 import { StdIOWindow } from '../StdIOWindow';
 
 export const Editor = () => {
