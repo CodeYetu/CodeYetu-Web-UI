@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Selector.sass';
 import {
 	ExpandLessOutlined,
 	ExpandMoreOutlined,
 	SearchOutlined,
 } from '@mui/icons-material';
+import { AppContext, AppContextType } from '../../context';
 
 interface SelectorOption {
 	name: string;
@@ -21,11 +22,16 @@ export const Selector: React.FC<SelectorProps> = ({ options }) => {
 	const [open, setOpen] = useState(false);
 	const [search, setSearch] = useState('');
 	const [selected, setSelected] = useState<SelectorOption>();
+	const { setLanguage } = useContext(AppContext) as AppContextType;
 
 	useEffect(() => {
 		const index = Math.floor(Math.random() * (options?.length || 0));
 		setSelected(options && options[index]);
 	}, []);
+
+	useEffect(() => {
+		setLanguage(selected);
+	}, [selected]);
 
 	return (
 		<div className='w-52 font-medium cursor-pointer'>
@@ -35,7 +41,7 @@ export const Selector: React.FC<SelectorProps> = ({ options }) => {
 					!selected && 'text-white'
 				}`}
 			>
-				<p className='py-2'>
+				<div className='py-2'>
 					{selected?.name ? (
 						selected.name.length > 25 ? (
 							`${selected.name.substring(0, 15)}...`
@@ -50,7 +56,7 @@ export const Selector: React.FC<SelectorProps> = ({ options }) => {
 					) : (
 						'Select Language'
 					)}
-				</p>
+				</div>
 				{!open ? <ExpandMoreOutlined /> : <ExpandLessOutlined />}
 			</div>
 			<ul
