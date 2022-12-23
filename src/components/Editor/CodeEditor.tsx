@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { ZoomInOutlined, ZoomOutOutlined } from '@mui/icons-material';
+import {
+	EditSharp,
+	ZoomInOutlined,
+	ZoomOutOutlined,
+} from '@mui/icons-material';
 import AceEditor from 'ace-builds';
 import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -25,13 +29,13 @@ export const CodeEditor = () => {
 	const editorRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const editor = AceEditor.edit(editorRef.current as HTMLDivElement);
+		const editor = AceEditor.edit(editorRef.current as HTMLDivElement, {
+			value: code,
+			theme: 'ace/theme/one_dark',
+			mode: 'ace/mode/c_cpp',
+		});
 
-		// Configure the editor
-		editor.setValue(code);
-		editor.setTheme('ace/theme/one_dark');
-		editor.session.setMode('ace/mode/c_cpp');
-
+		editor.setShowPrintMargin(false);
 		editor.setOptions({
 			fontSize: `${fontSize}pt`,
 			fontFamily: 'Source Code Pro, Nunito, Raleway, monospace',
@@ -41,6 +45,11 @@ export const CodeEditor = () => {
 		editor.on('change', () => {
 			setCode(editor.getValue());
 		});
+
+		editor.on('mouseup', () => {
+			editor.resize();
+		});
+
 		editor.selection.on('changeCursor', () => {
 			// console.log('Cursor moved!');
 		});
@@ -49,7 +58,12 @@ export const CodeEditor = () => {
 	}, [fontSize]);
 
 	return (
-		<>
+		<div
+			style={{
+				height: 'calc(100% - 10px)',
+			}}
+			className='relative h-full'
+		>
 			<div ref={editorRef} className='h-full w-full'></div>
 			<div className='absolute bottom-1 right-1 z-10 w-auto'>
 				<button
@@ -69,6 +83,6 @@ export const CodeEditor = () => {
 					</span>
 				</button>
 			</div>
-		</>
+		</div>
 	);
 };
