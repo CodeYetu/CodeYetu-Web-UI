@@ -13,7 +13,7 @@ export const Resizable: React.FC<ResizableProps> = ({
 	let resizableProps: ResizableBoxProps;
 	const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 	const [innerHeight, setInnerHeight] = useState(window.innerHeight);
-	const [width, setWidth] = useState(innerWidth * 0.65);
+	const [width, setWidth] = useState(innerWidth * 0.505);
 
 	useEffect(() => {
 		let timer: any;
@@ -49,7 +49,7 @@ export const Resizable: React.FC<ResizableProps> = ({
 			height: Infinity,
 			resizeHandles: ['e'],
 			maxConstraints: [innerWidth * 0.8, Infinity],
-			minConstraints: [innerWidth * 0.2, Infinity],
+			minConstraints: [5, Infinity],
 			onResizeStop: (event, data) => {
 				setWidth(data.size.width);
 			},

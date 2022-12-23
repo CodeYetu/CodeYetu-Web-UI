@@ -10,7 +10,7 @@ import { ZoomInOutlined, ZoomOutOutlined } from '@mui/icons-material';
 import { Resizable } from '../Resizable';
 
 export const Editor = () => {
-	const [code, setCode] = useState('Hello World');
+	const [code, setCode] = useState('console.log("Hello World!");');
 	const [fontSize, setFontSize] = useState(13);
 	const editorRef = useRef<HTMLDivElement>(null);
 
