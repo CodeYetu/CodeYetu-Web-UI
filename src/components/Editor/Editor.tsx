@@ -10,14 +10,18 @@ import { ZoomInOutlined, ZoomOutOutlined } from '@mui/icons-material';
 import { Resizable } from '../Resizable';
 
 export const Editor = () => {
-	const [code, setCode] = useState('');
-	const [fontSize, setFontSize] = useState(12);
+	const [code, setCode] = useState('Hello World');
+	const [fontSize, setFontSize] = useState(13);
 	const editorRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const FontSizeTheme = EditorView.theme({
+		const CustomTheme = EditorView.theme({
 			'&': {
 				fontSize: `${fontSize}pt`,
+			},
+			'.cm-content': {
+				fontFamily: 'Source Code Pro, Nunito, Raleway, monospace',
+				fontWeight: 500,
 			},
 		});
 
@@ -26,12 +30,12 @@ export const Editor = () => {
 		});
 
 		const editorStartState = EditorState.create({
-			doc: 'Hello World', // creates a default hello world language
+			doc: code, // creates a default hello world language
 			extensions: [
 				basicSetup,
 				keymap.of([indentWithTab]),
 				oneDark,
-				[FontSizeTheme],
+				[CustomTheme],
 				javascript({ jsx: true, typescript: true }),
 				onUpdate,
 			],
