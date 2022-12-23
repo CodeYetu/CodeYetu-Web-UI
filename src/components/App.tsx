@@ -8,6 +8,7 @@ export const App = () => {
 
 	useEffect(() => {
 		console.log(language);
+		return;
 	}, [language]);
 
 	return (

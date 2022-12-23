@@ -27,10 +27,12 @@ export const Selector: React.FC<SelectorProps> = ({ options }) => {
 	useEffect(() => {
 		const index = Math.floor(Math.random() * (options?.length || 0));
 		setSelected(options && options[index]);
+		return;
 	}, []);
 
 	useEffect(() => {
 		setLanguage(selected);
+		return;
 	}, [selected]);
 
 	return (
